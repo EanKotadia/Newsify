@@ -625,10 +625,16 @@ export default function App() {
 
       {/* Navbar */}
       <nav className="navbar">
-        <a className="brand" href="#">
-          <div className="brand-icon"><img src={"Designer.png"} alt="Newsify" style={{ width:"28px", height:"28px", objectFit:"contain", borderRadius:"6px", display:"block" }} /></div>
-          <span className="brand-name">News<span>ify</span></span>
-        </a>
+          <a className="brand" href="/" >
+              <div className="brand-icon">
+                  <img
+                      src={"Designer.png"}
+                      alt="Newsify"
+                      style={{ width:"28px", height:"28px", objectFit:"contain", borderRadius:"6px", display:"block" }}
+                  />
+              </div>
+              <span className="brand-name">News<span>ify</span></span>
+          </a>
         <div className="search-wrap">
           <input ref={inputRef} type="text" placeholder="Search news, topics, sources…"
             value={query} onChange={e => setQuery(e.target.value)}

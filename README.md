@@ -2,8 +2,8 @@
 
 Newsify is a misinformation-filtering news platform that verifies news articles and images using AI and trusted sources. It aggregates news from multiple reliable publications and cross-checks the validity of media content. This is a fully functional recreation of the original project, developed in 2026 as part of my Grade 10 hackathon experience.
 
-**Demo Video:** [Newsify Video](https://www.youtube.com/watch?v=fQQC8_rNQTc&t=13140s)
-
+### **Demo Video:** [Newsify Video](https://www.youtube.com/watch?v=fQQC8_rNQTc&t=13140s)
+### **Website:** [Newsify Live](https://newsify-seven.vercel.app)
 ---
 
 ## What is Newsify

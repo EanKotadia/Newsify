@@ -1,70 +1,142 @@
-# Getting Started with Create React App
+# Newsify — Remade and Running
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Newsify is a misinformation-filtering news platform that verifies news articles and images using AI and trusted sources. It aggregates news from multiple reliable publications and cross-checks the validity of media content. This is a fully functional recreation of the original project, developed in 2026 as part of my Grade 10 hackathon experience.
 
-## Available Scripts
+**Demo Video:** [Newsify Video](https://www.youtube.com/watch?v=fQQC8_rNQTc&t=13140s)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## What is Newsify
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Newsify fetches live news articles and runs two-tier verification on every story:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Tier 1 — Heuristic Analysis:** Scans headlines for clickbait patterns, sensational words, ALL CAPS, punctuation, and credibility markers.
+- **Tier 2 — Google Fact Check API:** Cross-references headlines against claims verified by Snopes, PolitiFact, AFP, and other professional fact-checkers.
 
-### `npm test`
+Users can also submit suspicious articles for review, subscribe to a newsletter, and send feedback. All user data is stored in Supabase.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Layer          | Technology |
+|----------------|------------|
+| Frontend       | React (JSX) |
+| News Data      | NewsAPI |
+| Fact Checking  | Google Fact Check Tools API + Heuristic Engine |
+| Database       | Supabase (PostgreSQL) |
+| Styling        | CSS-in-JS (no external UI library) |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Prerequisites
 
-### `npm run eject`
+Before starting, make sure you have:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js v16 or higher
+- npm (comes with Node.js)
+- A code editor (VS Code or WebStorm recommended)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Setup Instructions
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Step 1 — Clone the Project
 
-## Learn More
+```bash
+git clone https://github.com/yourusername/newsify.git
+cd newsify
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Or create a new React app and replace files:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+npx create-react-app newsify
+cd newsify
 
-### Code Splitting
+### Step 2 — Install Dependencies
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Step 3 — Add Project Files
 
-### Analyzing the Bundle Size
+Delete src/App.js and src/App.css.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Copy Newsify.jsx into the src/ folder.
 
-### Making a Progressive Web App
+Update src/index.js import:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+import App from './Newsify';
 
-### Advanced Configuration
+Place your logo (Designer.png) in the public/ folder.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Step 4 — Configure API Keys
 
-### Deployment
+Create a .env file in the root folder:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+REACT_APP_NEWS_API_KEY=your_newsapi_key_here
+REACT_APP_FACT_CHECK_KEY=your_google_fact_check_key_here
+REACT_APP_SUPABASE_URL=https://your-project-id.supabase.co
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 
-### `npm run build` fails to minify
+Do not commit .env to GitHub.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Step 5 — Supabase Setup
+
+Sign up at supabase.com
+ and create a new project.
+
+Copy Project URL → REACT_APP_SUPABASE_URL.
+
+Copy anon public key → REACT_APP_SUPABASE_ANON_KEY.
+
+#### Create Tables via SQL Editor
+CREATE TABLE newsletter (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  email text NOT NULL,
+  created_at timestamp DEFAULT now()
+);
+
+CREATE TABLE feedback (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  name text,
+  email text,
+  feedback text NOT NULL,
+  created_at timestamp DEFAULT now()
+);
+
+CREATE TABLE news_submissions (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  article_text text NOT NULL,
+  status text DEFAULT 'pending',
+  created_at timestamp DEFAULT now()
+);
+### Step 6 — Run the App
+npm start
+
+Open http://localhost:3000 to view the app.
+
+
+## Badge Meanings
+| Badge              | Meaning                                |
+| ------------------ | -------------------------------------- |
+| Verified           | Confirmed credible by fact-checkers    |
+| Disputed           | Flagged as false or misleading         |
+| Mixed              | Partially verified                     |
+| Unverified         | No strong signals detected             |
+| Likely Sensational | Heuristic detected clickbait patterns  |
+| Credible Language  | Heuristic detected credibility markers |
+
+## Troubleshooting
+| Problem                     | Fix                                                                          |
+| --------------------------- | ---------------------------------------------------------------------------- |
+| News not loading            | Check `REACT_APP_NEWS_API_KEY` and restart server                            |
+| All cards show "Unverified" | Google Fact Check may not have that claim — heuristic runs as fallback       |
+| Supabase insert failing     | Table names must match exactly: `newsletter`, `feedback`, `news_submissions` |
+| Logo not showing            | Ensure `Designer.png` is in `public/`                                        |
+| API keys not working        | Restart `npm start` after editing `.env`                                     |
+| CORS error in production    | Free NewsAPI blocks browser requests — use backend proxy                     |
+
+## License
+MIT — free to use, modify, and distribute.
+
+Built with React, NewsAPI, Google Fact Check Tools, and Supabase.
+

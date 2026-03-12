@@ -60,8 +60,11 @@ Place your logo (Designer.png) in the public/ folder.
 ### Create a .env file in the root folder:
 
 REACT_APP_NEWS_API_KEY=your_newsapi_key_here
+
 REACT_APP_FACT_CHECK_KEY=your_google_fact_check_key_here
+
 REACT_APP_SUPABASE_URL=https://your-project-id.supabase.co
+
 REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 
 ## Step 5 — Supabase Setup

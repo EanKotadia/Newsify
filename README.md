@@ -49,46 +49,48 @@ cd newsify
 ```
 
 Or create a new React app and replace files:
-
+```bash
 npx create-react-app newsify
 cd newsify
-
+```
 ### Step 2 — Install Dependencies
+```bash
 npm install
-
+```
 ### Step 3 — Add Project Files
 
-Delete src/App.js and src/App.css.
+1. Delete src/App.js and src/App.css.
 
-Copy Newsify.jsx into the src/ folder.
+2. Copy Newsify.jsx into the src/ folder.
 
-Update src/index.js import:
+3. Update src/index.js import:
 
-import App from './Newsify';
+4. import App from './Newsify';
 
-Place your logo (Designer.png) in the public/ folder.
+5. Place your logo (Designer.png) in the public/ folder.
 
 ### Step 4 — Configure API Keys
 
 Create a .env file in the root folder:
-
+```bash
 REACT_APP_NEWS_API_KEY=your_newsapi_key_here
 REACT_APP_FACT_CHECK_KEY=your_google_fact_check_key_here
 REACT_APP_SUPABASE_URL=https://your-project-id.supabase.co
 REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+```
 
-Do not commit .env to GitHub.
+> Do not commit .env to GitHub.
 
 ### Step 5 — Supabase Setup
 
-Sign up at supabase.com
- and create a new project.
+Sign up at supabase.com and create a new project.
 
+``` bash
 Copy Project URL → REACT_APP_SUPABASE_URL.
-
 Copy anon public key → REACT_APP_SUPABASE_ANON_KEY.
-
+```
 #### Create Tables via SQL Editor
+```sql
 CREATE TABLE newsletter (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   email text NOT NULL,
@@ -109,10 +111,13 @@ CREATE TABLE news_submissions (
   status text DEFAULT 'pending',
   created_at timestamp DEFAULT now()
 );
+```
 ### Step 6 — Run the App
+```bash
 npm start
+```
 
-Open http://localhost:3000 to view the app.
+> Open http://localhost:3000 to view the app.
 
 
 ## Badge Meanings
